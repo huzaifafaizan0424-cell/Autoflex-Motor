@@ -28,7 +28,7 @@ exports.getBookings = async (req, res) => {
   }
 };
 
-// PUT /api/bookings/:id/status (admin use - confirm/cancel)..............................
+// PUT /api/bookings/:id/status (admin use - confirm/cancel)
 exports.updateBookingStatus = async (req, res) => {
   try {
     const booking = await Booking.findByIdAndUpdate(

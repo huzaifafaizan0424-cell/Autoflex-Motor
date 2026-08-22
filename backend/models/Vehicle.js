@@ -1,18 +1,19 @@
 const mongoose = require("mongoose");
 
-// One shared schema used by all 4 frontend pillars.
+// One shared schema used by all 5 frontend pillars.
 // The "category" field decides which pillar/page a vehicle belongs to:
-//   "luxury"    -> luxury-rentals (Hussain Ali)
-//   "economy"   -> economy-rentals (Muhammad Hamza)
-//   "used-car"  -> used-car-dealership (Zahid Jamil)
-//   "workshop"  -> auto-workshop services (Raja Mustafa)
+//   "luxury"     -> luxury-rentals (Hussain Ali)
+//   "economy"    -> economy-rentals (Muhammad Hamza)
+//   "used-car"   -> used-car-dealership (Zahid Jamil)
+//   "workshop"   -> auto-workshop services (Raja Mustafa)
+//   "commercial" -> commercial-fleet (Muhammad Huzaifa Faizan)
 const vehicleSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     category: {
       type: String,
       required: true,
-      enum: ["luxury", "economy", "used-car", "workshop"],
+      enum: ["luxury", "economy", "used-car", "workshop", "commercial"],
     },
     brand: String,
     type: String, // e.g. Sedan, SUV, Hatchback, Convertible

@@ -3855,6 +3855,18 @@ font-family: 'Outfit', sans-serif;
     z-index: 2;
     margin-bottom: 15px;
 }
+.services1 .item .icon {
+    display: inline-block;
+    font-size: 54px;
+    line-height: 1;
+    color: #f5b754;
+    margin-bottom: 22px;
+    transition: transform 300ms ease, color 300ms ease;
+}
+.services1 .item:hover .icon {
+    color: #1b1b1b;
+    transform: scale(1.08);
+}
 .services1 .item .text h5 {
     border-radius: 20px;
     font-family: 'Outfit', sans-serif;
