@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="../../../css/plugins.css">
     <link rel="stylesheet" href="../../../css/style.css">
+    <meta name="description" content="Rent 32-seater tour coasters for group travel and tours. RENAX Commercial Fleet offers daily rental rates with luggage capacity.">
+    <meta property="og:title" content="Tour Bus & Coaster Rentals | RENAX">
+    <meta property="og:description" content="Rent 32-seater tour coasters for group travel and tours. RENAX Commercial Fleet offers daily rental rates with luggage capacity.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../../../img/logo-light.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        /* Mobile responsiveness for commercial-fleet custom sections */
+        .breadcrumb-strip .breadcrumb { flex-wrap: wrap; }
+        @media (max-width: 767px) {
+            .calc-box { padding: 20px !important; }
+            .calc-box .col-md-6 { margin-bottom: 15px; }
+            #calcResult { font-size: 18px !important; }
+            .service-area iframe { height: 260px !important; }
+            .breadcrumb-strip .breadcrumb { font-size: 13px; }
+            .booking-inner .col1, .booking-inner .col2, .booking-inner .col3 { width: 100% !important; margin-bottom: 12px; }
+        }
+        @media (max-width: 480px) {
+            .section-title, h1, h2 { font-size: 26px !important; }
+            .calc-box a.button-4 { width: 100%; text-align: center; margin-top: 15px; }
+        }
+    </style>
 </head>
 <body>
     <!-- Preloader -->
@@ -74,6 +96,15 @@
             </div>
         </div>
     </section>
+    <nav aria-label="breadcrumb" class="breadcrumb-strip">
+        <div class="container">
+            <ol class="breadcrumb" style="background:transparent;padding:15px 0;margin:0;">
+                <li class="breadcrumb-item"><a href="../../../index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.html">Commercial Fleet &amp; Leasing</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tour Bus &amp; Coaster Rentals</li>
+            </ol>
+        </div>
+    </nav>
     <div class="line-vr-section"></div>
 
     <!-- Quick facts strip -->
@@ -146,6 +177,64 @@
             </div>
         </div>
     </section>
+    <div class="line-vr-section"></div>
+
+    <!-- Price calculator -->
+    <section class="price-calc section-padding pt-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center mb-4">
+                    <h6>Plan Your Trip</h6>
+                    <h2>Tour Coaster <span>Price Calculator</span></h2>
+                    <p>Get an instant estimate based on your rental days and coach size.</p>
+                </div>
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="calc-box" style="background:#f8f8f8;border-radius:12px;padding:30px;">
+                        <div class="row">
+                            <div class="col-md-6 mb-20">
+                                <label for="calcDays">Number of Days</label>
+                                <input type="number" id="calcDays" class="form-control" min="1" value="1" style="width:100%;padding:10px;border-radius:6px;border:1px solid #ddd;">
+                            </div>
+                            <div class="col-md-6 mb-20">
+                                <label for="calcCoach">Coach Size</label>
+                                <select id="calcCoach" class="form-control" style="width:100%;padding:10px;border-radius:6px;border:1px solid #ddd;">
+                                    <option value="22000">22-Seater Coaster — PKR 22,000/day</option>
+                                    <option value="35000" selected>32-Seater Tour Coaster — PKR 35,000/day</option>
+                                    <option value="48000">45-Seater Luxury Bus — PKR 48,000/day</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="calcResult" style="font-size:22px;font-weight:600;margin-top:10px;">
+                            Estimated Total: <span style="color:#f7a325;">PKR 35,000</span>
+                        </div>
+                        <a href="../../../contact.html" class="button-4 mt-20">Request This Quote <span class="ti-arrow-top-right"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        (function() {
+            var daysInput = document.getElementById('calcDays');
+            var coachSelect = document.getElementById('calcCoach');
+            var resultEl = document.getElementById('calcResult');
+
+            function formatPKR(n) {
+                return 'PKR ' + n.toLocaleString('en-PK');
+            }
+
+            function updateCalc() {
+                var days = parseInt(daysInput.value, 10);
+                if (!days || days < 1) days = 1;
+                var rate = parseInt(coachSelect.value, 10);
+                var total = days * rate;
+                resultEl.innerHTML = 'Estimated Total: <span style="color:#f7a325;">' + formatPKR(total) + '</span> <small style="font-weight:400;color:#777;">(' + days + ' day' + (days > 1 ? 's' : '') + ' &times; ' + formatPKR(rate) + '/day)</small>';
+            }
+
+            daysInput.addEventListener('input', updateCalc);
+            coachSelect.addEventListener('change', updateCalc);
+        })();
+    </script>
     <div class="line-vr-section"></div>
 
     <!-- Amenities / Features -->

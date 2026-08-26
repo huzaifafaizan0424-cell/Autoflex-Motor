@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="../../../css/plugins.css">
     <link rel="stylesheet" href="../../../css/style.css">
+    <meta name="description" content="Lease cargo trucks, staff vans, and tour coaches for your business with RENAX Commercial Fleet. Flexible daily, monthly, and annual terms.">
+    <meta property="og:title" content="Commercial Fleet & Leasing | RENAX">
+    <meta property="og:description" content="Lease cargo trucks, staff vans, and tour coaches for your business with RENAX Commercial Fleet. Flexible daily, monthly, and annual terms.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../../../img/logo-light.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        /* Mobile responsiveness for commercial-fleet custom sections */
+        .breadcrumb-strip .breadcrumb { flex-wrap: wrap; }
+        @media (max-width: 767px) {
+            .calc-box { padding: 20px !important; }
+            .calc-box .col-md-6 { margin-bottom: 15px; }
+            #calcResult { font-size: 18px !important; }
+            .service-area iframe { height: 260px !important; }
+            .breadcrumb-strip .breadcrumb { font-size: 13px; }
+            .booking-inner .col1, .booking-inner .col2, .booking-inner .col3 { width: 100% !important; margin-bottom: 12px; }
+        }
+        @media (max-width: 480px) {
+            .section-title, h1, h2 { font-size: 26px !important; }
+            .calc-box a.button-4 { width: 100%; text-align: center; margin-top: 15px; }
+        }
+    </style>
 </head>
 <body>
     <!-- Preloader -->
@@ -303,12 +325,13 @@
                 </div>
             </div>
             <div class="booking-inner clearfix">
-                <form action="#0" class="form1 brdr clearfix">
+                <form action="#0" class="form1 brdr clearfix" id="fleetBookingForm" novalidate>
+                    <div id="fleetBookingError" class="text-center" style="display:none;color:#ff5c5c;width:100%;margin-bottom:10px;font-weight:600;"></div>
                     <div class="col2 c3">
                         <div class="select1_wrapper">
                             <label>Vehicle Type</label>
                             <div class="select1_inner">
-                                <select class="select2 select" style="width: 100%">
+                                <select class="select2 select" id="fbVehicleType" style="width: 100%">
                                     <option value="0">Vehicle Type</option>
                                     <option value="1">Cargo Pickup</option>
                                     <option value="2">Staff Van</option>
@@ -321,7 +344,7 @@
                         <div class="select1_wrapper">
                             <label>Lease Term</label>
                             <div class="select1_inner">
-                                <select class="select2 select" style="width: 100%">
+                                <select class="select2 select" id="fbLeaseTerm" style="width: 100%">
                                     <option value="0">Lease Term</option>
                                     <option value="1">Daily</option>
                                     <option value="2">Monthly</option>
@@ -334,7 +357,7 @@
                         <div class="input1_wrapper">
                             <label>Pick Up Date</label>
                             <div class="input1_inner">
-                                <input type="text" class="form-control input datepicker" placeholder="Pick Up Date" required="">
+                                <input type="text" class="form-control input datepicker" id="fbPickupDate" placeholder="Pick Up Date" required="">
                             </div>
                         </div>
                     </div>
@@ -355,7 +378,7 @@
                         <div class="input1_wrapper">
                             <label>Return Date</label>
                             <div class="input1_inner">
-                                <input type="text" class="form-control input datepicker" placeholder="Return Date">
+                                <input type="text" class="form-control input datepicker" id="fbReturnDate" placeholder="Return Date">
                             </div>
                         </div>
                     </div>
@@ -363,6 +386,41 @@
                         <button type="submit" class="booking-button">Get Quote</button>
                     </div>
                 </form>
+                <script>
+                    (function() {
+                        var form = document.getElementById('fleetBookingForm');
+                        var errorBox = document.getElementById('fleetBookingError');
+                        if (!form) return;
+
+                        form.addEventListener('submit', function(e) {
+                            var vehicleType = document.getElementById('fbVehicleType').value;
+                            var leaseTerm = document.getElementById('fbLeaseTerm').value;
+                            var pickupDate = document.getElementById('fbPickupDate').value.trim();
+                            var returnDate = document.getElementById('fbReturnDate').value.trim();
+                            var errors = [];
+
+                            if (vehicleType === '0') errors.push('Please select a vehicle type.');
+                            if (leaseTerm === '0') errors.push('Please select a lease term.');
+                            if (!pickupDate) errors.push('Pick up date is required.');
+                            if (pickupDate && returnDate) {
+                                var pd = new Date(pickupDate);
+                                var rd = new Date(returnDate);
+                                if (!isNaN(pd) && !isNaN(rd) && rd < pd) {
+                                    errors.push('Return date cannot be before pick up date.');
+                                }
+                            }
+
+                            if (errors.length) {
+                                e.preventDefault();
+                                errorBox.innerHTML = errors.join('<br>');
+                                errorBox.style.display = 'block';
+                                errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            } else {
+                                errorBox.style.display = 'none';
+                            }
+                        });
+                    })();
+                </script>
             </div>
         </div>
     </section>
